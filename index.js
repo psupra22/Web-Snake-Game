@@ -55,17 +55,20 @@ function handleKeyPress(event) {
         gameState.direction = "left";
     if (event.key === "ArrowRight" && gameState.direction !== "left") 
         gameState.direction = "right";
-    if (event.key === " " && gameStarted === false) {
-        gameStarted = true;
-        menu.style.display = "none";
-        game = setInterval(gameLoop, SPEED);
-    }
+    if (event.key === " " && gameStarted === false) 
+        startGame();
     if (event.key === "r" && gameStarted) {
         initGame();
         clearInterval(game);
         game = setInterval(gameLoop, SPEED);
         menu.style.display = "none";
     }
+}
+
+function startGame() {
+    gameStarted = true;
+    menu.style.display = "none";
+    game = setInterval(gameLoop, SPEED);
 }
 
 function moveSnake() {
