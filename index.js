@@ -63,7 +63,6 @@ function handleKeyPress(event) {
         startGame();
     if (event.key === "r" && gameStarted && !running) {
         initGame();
-        clearInterval(game);
         game = setInterval(gameLoop, SPEED);
         running = true;
         menu.style.display = "none";
