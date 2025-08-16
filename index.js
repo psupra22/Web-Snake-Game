@@ -6,6 +6,7 @@ const GRID_SIZE = 10;  // 10x10
 let SPEED = 350;  // ms per move
 
 let gameStarted = false;
+let running = false;
 let finalScore = 0;
 let game;
 const gameState = {
@@ -37,6 +38,7 @@ function initGame() {
 
 function gameLoop() {
     if (gameState.gameOver) {
+        running = false;
         clearInterval(game);
         restartGame();
         return;
@@ -59,16 +61,18 @@ function handleKeyPress(event) {
         gameState.direction = key;
     if (event.key === " " && gameStarted === false) 
         startGame();
-    if (event.key === "r" && gameStarted) {
+    if (event.key === "r" && gameStarted && !running) {
         initGame();
         clearInterval(game);
         game = setInterval(gameLoop, SPEED);
+        running = true;
         menu.style.display = "none";
     }
 }
 
 function startGame() {
     gameStarted = true;
+    running = true;
     menu.style.display = "none";
     game = setInterval(gameLoop, SPEED);
 }
