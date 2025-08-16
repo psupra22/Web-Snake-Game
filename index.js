@@ -47,14 +47,16 @@ function gameLoop() {
 }
 
 function handleKeyPress(event) {
-    if (event.key === "ArrowUp" && gameState.direction !== "down") 
-        gameState.direction = "up";
-    if (event.key === "ArrowDown" && gameState.direction !== "up") 
-        gameState.direction = "down";
-    if (event.key === "ArrowLeft" && gameState.direction !== "right") 
-        gameState.direction = "left";
-    if (event.key === "ArrowRight" && gameState.direction !== "left") 
-        gameState.direction = "right";
+    const opposite = {
+        up: "down",
+        down: "up",
+        left: "right",
+        right: "left"
+    }
+    const key = event.key.replace("Arrow", "").toLowerCase();
+
+    if (opposite[key] && (gameState.direction !== opposite[key]))
+        gameState.direction = key;
     if (event.key === " " && gameStarted === false) 
         startGame();
     if (event.key === "r" && gameStarted) {
